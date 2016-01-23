@@ -5,43 +5,59 @@
 //  Created by Андрей Лазарев on 01/24/2016.
 //  Copyright (c) 2016 Андрей Лазарев. All rights reserved.
 //
-
 // https://github.com/Specta/Specta
+
+#import "CPSearchable.h"
+#import "NSObject+RegexPath.h"
 
 SpecBegin(InitialSpecs)
 
-describe(@"these will fail", ^{
+describe(@"dictionary", ^{
 
-    it(@"can do maths", ^{
-        expect(1).to.equal(2);
-    });
-
-    it(@"can read", ^{
-        expect(@"number").to.equal(@"string");
+    id<CPSearchable> object = @{@"A": @{@"A": @1},
+                                @"B": @2,
+                                @"C": @[@1, @[@YES], @{@"D": @3}]};
+    
+    it(@"can fetch paths", ^{
+        expect([object valuesForKeyRegexp:@"A$"]).toNot.beNil();
     });
     
-    it(@"will wait for 10 seconds and fail", ^{
-        waitUntil(^(DoneCallback done) {
-        
-        });
+    it(@"can fetch exact from NSArray", ^{
+        expect([object firstForKeyWildcard:@"C[0]"]).to.equal(@1);
     });
+
+    it(@"can fetch exact from NSDictionary", ^{
+        expect([object firstForKeyWildcard:@"C[2].D"]).to.equal(@3);
+    });
+    
 });
 
-describe(@"these will pass", ^{
-    
-    it(@"can do maths", ^{
-        expect(1).beLessThan(23);
+describe(@"array", ^{
+
+    id<CPSearchable> object = @[@{@"A": @1},
+                                @2,
+                                @[@1, @[@YES], @{@"D": @3}]];
+
+    it(@"can fetch paths", ^{
+        expect([object valuesForKeyRegexp:@"\\[0\\]$"]).toNot.beNil();
     });
     
-    it(@"can read", ^{
-        expect(@"team").toNot.contain(@"I");
+    it(@"can fetch exact from NSArray by regexp", ^{
+        expect([object firstForKeyRegexp:@"\\[2\\]\\[0\\]$"]).to.equal(@1);
     });
     
-    it(@"will wait and succeed", ^{
-        waitUntil(^(DoneCallback done) {
-            done();
-        });
+    it(@"can fetch exact from NSArray by wildcard", ^{
+        expect([object firstForKeyWildcard:@"[2][0]"]).to.equal(@1);
     });
+
+    it(@"can fetch exact from NSDictionary by regexp", ^{
+        expect([object firstForKeyRegexp:@"\\[2\\]\\[2\\].D$"]).to.equal(@3);
+    });
+    
+    it(@"can fetch exact from NSDictionary by wildcard", ^{
+        expect([object firstForKeyWildcard:@"[2][2].D"]).to.equal(@1);
+    });
+    
 });
 
 SpecEnd
