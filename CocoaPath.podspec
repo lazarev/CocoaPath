@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = "CocoaPath"
   s.version          = "0.1.0"
-  s.summary          = "A short description of CocoaPath."
+  s.summary          = "XPath like solution to fetch objects from nested containers with simple wildcard or regexp based syntax"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,13 +17,14 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+  XPath like solution to fetch objects from nested containers with simple wildcard or regexp based syntax.
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/CocoaPath"
+  s.homepage         = "https://github.com/lazarev/CocoaPath"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Андрей Лазарев" => "andrej.lazarev@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/CocoaPath.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/lazarev/CocoaPath.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'

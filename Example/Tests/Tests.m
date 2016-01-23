@@ -55,7 +55,7 @@ describe(@"array", ^{
     });
     
     it(@"can fetch exact from NSDictionary by wildcard", ^{
-        expect([object firstForKeyWildcard:@"[2][2].D"]).to.equal(@1);
+        expect([object firstForKeyWildcard:@"[2][2].D"]).to.equal(@3);
     });
     
 });

@@ -14,7 +14,7 @@
                      callback:(void (^)(id object, NSString* path))callback {
     for (id object in self) {
         NSUInteger index = [self indexOfObject:object];
-        NSString* fullPath = [NSString stringWithFormat:@"%@[%ld]", path ?: @"", index];
+        NSString* fullPath = [NSString stringWithFormat:@"%@[%ld]", path ?: @"", (unsigned long)index];
         callback(object, fullPath);
         if ([object respondsToSelector:@selector(enumarateLeafsWithPath:callback:)]) {
             [object enumarateLeafsWithPath:fullPath
