@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+
+target 'CocoaPath_Tests', :exclusive => true do
+  pod "CocoaPath", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
