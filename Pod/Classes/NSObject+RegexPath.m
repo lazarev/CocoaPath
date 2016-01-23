@@ -43,6 +43,8 @@
 -(NSDictionary*)valuesAndKeysForKeyWildcard:(NSString*)pattern {
     pattern = [pattern stringByReplacingOccurrencesOfString:@"[" withString:@"\\["];
     pattern = [pattern stringByReplacingOccurrencesOfString:@"]" withString:@"\\]"];
+    pattern = [pattern stringByReplacingOccurrencesOfString:@"*" withString:@".*"];
+    pattern = [pattern stringByReplacingOccurrencesOfString:@"." withString:@"\\."];
     pattern = [pattern stringByAppendingString:@"$"];
     return [self valuesAndKeysForKeyRegexp:pattern];
 }
